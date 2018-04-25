@@ -1,0 +1,210 @@
+body {
+  margin: 0;
+  background-image: url(gym.jpg);
+}
+
+nav {
+  display: grid;
+  grid-template-columns: 110px 150px 150px 110px 110px 110px 110px 110px;
+  grid-auto-rows: 42.5px;
+  grid-gap: 5px;
+  align-items: center;
+  text-align: center;
+  border-bottom: 4px solid black;
+  background: grey;
+}
+
+/*
+@media screen and (max-width: 900px) {
+  nav {
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
+    grid-gap: 1em; 
+ }  
+}
+*/
+
+.1 {
+  grid-column: 1;
+}
+
+.2 {
+  grid-column: 2;
+}
+
+.logo {
+  grid-column: 10;
+  background-image: url("Muscle-Up.jpg");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 5vh;
+}
+
+.3 {
+  grid-column: 4;
+}
+
+.4 {
+  grid-column: 5;
+}
+
+.4 {
+  grid-column: 5;
+}
+
+.5 {
+  grid-column: 6;
+}
+
+.6 {
+  grid-column: 7;
+}
+
+.navLinks {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: black;
+}
+
+.navLinks:hover {
+  color: white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  padding: 1em 1em;
+}
+
+#twist {
+  color: blue;
+}
+
+.text-block {
+    position: absolute;
+    bottom: 200px;
+    right: 900px;
+    background-color: black;
+    color: black;
+    width: 400px;
+    height: 215px;
+}
+
+.block {
+    position: absolute;
+    bottom: 700px;
+    right: 400px;
+    background-color: black;
+    color: black;
+    width: 1100px;
+    height: 170px;
+}
+
+@media screen and (max-width: 600px) {
+  .nav a:not(:first-child), .dropdown .dropbtn {
+    display: none;
+  }
+  .nav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav.responsive {position: relative;}
+  .nav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .nav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .nav.responsive .dropdown {float: none;}
+  .nav.responsive .dropdown-content {position: relative;}
+  .nav.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/*form {border: 3px solid #f1f1f1;}*/
+
+.form {
+  background: darkgrey;
+  padding: 1px;
+  max-width:600px;
+  margin:40px auto;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid grey;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: black;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+    color: white;
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+.signbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: dimgrey;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+
+.cont {
+    padding: 16px;
+}
+
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+/*
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+    .cancelbtn {
+       width: 100%;
+    }
+}*/
