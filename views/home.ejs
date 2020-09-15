@@ -1,0 +1,106 @@
+<% include partials/header.ejs %>
+    <body>
+<br>
+<br>
+<br>
+<br>
+    
+<div class="form">
+
+  <div class="imgcontainer">
+    <img src="/power.jpg" alt="Avatar" class="avatar">
+  </div>
+
+  <div class="cont">
+   <div id="message" style="color: red;"></div>
+    <label for="uname"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="uname" id="loginEmail" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw"  id="loginPassword" required>
+        
+    <button type="submit" onClick={signIn()}>Login</button>
+  </div>
+
+  <div class="box" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+<!--    <button type="button" class="signbtn">Sign Up</button>-->
+    <button onclick="document.getElementById('id01').style.display='block'"  class="signbtn">Sign Up</button>
+
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+
+    <div class="modal-content">
+      <h1>Create Account</h1>
+      <p>Please fill in this form to create an account.</p>
+      <hr>
+     <div id="signUpErrorMessage"></div>
+      <label for="name"><b>Name</b></label>
+      <input type="text" placeholder="Enter Name" name="name" required id="registerName">
+      
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required id="registerEmail">
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required id="registerPassword">
+<br>
+        <button type="submit" class="signbtn" onClick={createUser()}>Submit</button>
+    </div>
+        </div>
+    </div>
+        </div>
+        	<script>
+		function signIn() {
+			const email = document.getElementById('loginEmail').value;
+			const password = document.getElementById('loginPassword').value;
+            const errorMessage = document.getElementById('message');
+            
+			if (email && password) {
+				firebase.auth().signInWithEmailAndPassword(email, password)
+					.then(function(user) {
+						console.log(user);
+						location.href = "/programs";
+					})
+					.catch(function(error) {
+						console.log(error);
+						errorMessage.textContent = error.message;
+					});
+			} else {
+				errorMessage.textContent = "Enter valid name, email and password.";
+			}
+		}
+        
+                
+        function createUser() {
+			const email = document.getElementById('registerEmail').value;
+			const password = document.getElementById('registerPassword').value;
+            const name = document.getElementById('registerName').value;
+            
+            firebase.auth().createUserWithEmailAndPassword(email, password)
+				.then(function(newUser) {
+                console.log(newUser);
+					newUser.user.updateProfile({ displayName: name})
+						.then(function(success) {
+							const db = firebase.database();
+							const ref = db.ref('/users/' + newUser.user.uid);
+							ref.set({ name: name })
+								.then(function(success){
+									location.href = '/programs';
+								})
+								.catch(function(error) {
+									console.log(error);
+								})
+						})
+						.catch(function(error){
+							console.log(error);
+						});
+				})
+				.catch(function(error) {
+					const errorMessage = document.getElementById("signUpErrorMessage");
+					errorMessage.textContent = error;
+                    console.log(error)
+				});
+		}
+	</script>
+    </body>
+</html>

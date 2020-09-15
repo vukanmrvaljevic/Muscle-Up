@@ -1,0 +1,116 @@
+<% include partials/header.ejs %>
+    <body class="home-bg">
+      
+      <% include partials/head.ejs %>
+      
+    <div class="media">   
+      <section class="social-media">
+        <div class="social">  
+           <div class="con">
+  <img src="twitter.jpg" alt="Avatar" style="width:100%;">
+  <p>One of the big keys to ensuring your muscles get all they need to function at their highest levels is the food you eat.</p>
+</div>
+
+<div class="con darker">
+  <img src="facebook.png" alt="Avatar" style="width:100%;">
+  <p>Stulberg likes to throw down a simple smoothie after his work outs. “My go-to recipe is almond milk, ice, two bananas, a scoop of whey protein and a bit of almond butter,” he says. “Then I crush a few pretzels and mix them in”</p>
+</div>
+
+<div class="con">
+  <img src="facebook.png" alt="Avatar" style="width:100%;">
+  <p>It’s important to determine the right amounts of protein for the work out so that you’re not adding in calories your body doesn’t need.</p>
+</div>
+
+<div class="con darker">
+  <img src="twitter.jpg" alt="Avatar" style="width:100%;">
+  <p> taking in protein isn’t necessary after every sweat session, and the food you choose for repletion matters.</p>
+</div>
+      
+<div class="con">
+  <img src="facebook.png" alt="Avatar" style="width:100%;">
+  <p> big fan of sleep as a recovery tool. “The harder you’re training, the more sleep you need.</p>
+</div>
+      
+<div class="con darker">
+  <img src="twitter.jpg" alt="Avatar" style="width:100%;">
+  <p>Other important components to high-quality sleep include a cool, dark room, routine bed times/wake times, and sleeping on a comfortable mattress and pillows, according to the National Sleep Foundation. </p>
+</div>           
+       </div>
+        </section>
+    <section class="search">
+  <div class="connect">
+      <h2><i>Member Search & Connect</i></h2>
+   <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+   
+    <label for="uname"><b>Member First Name</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+<br>
+<br>
+    <label for="psw"><b>Memeber Last Name</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+     &nbsp; &nbsp; &nbsp;     
+    <button type="submit">Connect</button>   
+  </div>
+        </section>
+    <section class="post">
+       <div id="post">
+		<textarea id="post-text" placeholder="Write a new post here"></textarea>
+		<br>
+		<button onclick={savePost()}>Post</button>
+	</div>
+	<div id="message"></div>
+        </section>
+        <section class="users">
+        <div id="users">
+          <!-- <%= JSON.stringify(data) %>-->
+            <h2>Users</h2>
+            <% let keys = Object.keys(data); %>
+            <% if (keys.length) { %>
+                <% keys.forEach(function(key) { %>
+                    <% let user = data[key]; %>
+                    <div class="name">
+                        <a href="/social/<%= key %>"><%= user.name %></a>
+                    </div>
+                    
+                <% }); %> 
+            <% } else { %>
+                <p>This website has no users.</p>
+            <% } %>
+	    </div>          
+        </section>
+            </div>
+        <script>
+		function savePost() {
+			const message = document.getElementById("message");
+			const text = document.getElementById("post-text");
+			const uid = firebase.auth().currentUser.uid;
+			const db = firebase.database();
+			const ref = db.ref('/users/' + uid + '/posts');
+		
+			const post = {
+				text: document.getElementById("post-text").value,
+				date: new Date().toString()
+			};
+			
+			ref.push(post)
+				.then(function(success){
+					message.textContent = "Your post was added successfully.";
+					text.value = "";
+				})
+				.catch(function(error){
+					console.log(error);
+				});
+		}
+            
+            
+            firebase.auth().onAuthStateChanged(function(user) {
+			//console.log(user.uid);
+			const posts = document.getElementsByClassName('post');
+			//console.log(posts);
+		});
+
+            
+            
+        </script>
+    </body>
+</html>
